@@ -1,9 +1,21 @@
-Theory and Algorithm
+Theory
 =======
 
 
 This page explains the simulation method of this repository, which extends the functionality of [LOWESA](https://arxiv.org/abs/2308.09109). Almost all of my understanding of the Pauli transfer matrix (PTM) formalism is learned from the inexhaustible [Manuel Rudolph](https://github.com/MSRudolph), although the inevitable mistakes herein are my own.
 
+**TOC**:
+
+- [PTMs](#ptms)
+- [PTMs are _sparse_](#ptms-are-sparse)
+- [PTMs are _maps_](#ptms-are-maps)
+- [PTM maps can be _pre-computed_ or _cached_](#ptm-maps-can-be-pre-computed-or-cached)
+- [PTM elements can be evaluated _later_](#ptm-elements-can-be-evaluated-later)
+- [Weights can be evaluated _hierarchically_](#weights-can-be-evaluated-hierarchically)
+- [Pauli strings can be _merged_](#pauli-strings-can-be-merged)
+- [Pauli strings can be _integers_](#pauli-strings-can-be-integers)
+- [Many Pauli strings are _irrelevant_](#many-pauli-strings-are-irrelevant)
+- [Many Pauli strings are _unimportant_](#many-pauli-strings-are-unimportant)
 
 
 
