@@ -11,7 +11,7 @@ This page explains the simulation method of this repository, which extends the f
 - [PTMs are _maps_](#ptms-are-maps)
 - [PTM maps can be _pre-computed_ or _cached_](#ptm-maps-can-be-pre-computed-or-cached)
 - [PTM elements can be evaluated _later_](#ptm-elements-can-be-evaluated-later)
-- [Weights can be evaluated _hierarchically_](#weights-can-be-evaluated-hierarchically)
+- [Pauli string weights can be evaluated _hierarchically_](#pauli-string-weights-can-be-evaluated-hierarchically)
 - [Pauli strings can be _merged_](#pauli-strings-can-be-merged)
 - [Pauli strings can be _integers_](#pauli-strings-can-be-integers)
 - [Many Pauli strings are _irrelevant_](#many-pauli-strings-are-irrelevant)
@@ -343,7 +343,7 @@ This is fantastically useful for simulating variational algorithms wherein repea
 
 --------------------
 
-# Weights can be evaluated _hierarchically_
+# Pauli string weights can be evaluated _hierarchically_
 
 The actual numerical evaluation of the weights of the output Pauli strings can leverage graph algorithms and [memoization](https://en.wikipedia.org/wiki/Memoization).
 
