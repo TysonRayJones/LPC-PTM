@@ -123,26 +123,23 @@ def getCoeffOfPauliStringProd(aInd, bInd):
 
 def doPauliStringIndsCommute(aInd, bInd):
 
-    # this is a slow, dumb way of determining
-    # whether [aInd,bInd]==0; we should replace
-    # this with a faster bitwise/parity method since 
-    # this function is called in a huge, tight loop
+    # masks for extracting every 2nd bit
+    mask0 = 0b01010101010101010101010101010101 # 32 bits = max 16 qubits
+    mask1 = mask0 << 1
 
-    # short-circuit to avoid log2(0) below
-    if (aInd == 0) or (bInd==0):
-        return True
+    # obtain the left (then right) bits of each Pauli pair, in-place
+    aBits0, aBits1 = mask0 & aInd, mask1 & aInd
+    bBits0, bBits1 = mask0 & bInd, mask1 & bInd
 
-    # obtain individual operators (avoid recomp by above func)
-    numPaulis = ceil(log2(max(aInd,bInd))) // 2
-    aFlags = list(getAllPaulisFromInd(aInd, numPaulis)) # must discard mutable iterator
-    bFlags = list(getAllPaulisFromInd(bInd, numPaulis))
+    # shift left bits to align with right bits
+    aBits1 >>= 1
+    bBits1 >>= 1
 
-    # obtain coefficients 
-    abCoeff = _getCoeffOfPauliSeqProd(aFlags, bFlags)
-    baCoeff = _getCoeffOfPauliSeqProd(bFlags, aFlags)
+    # sets '10' at every Pauli index where individual pairs don't commute
+    flags = (aBits0 & bBits1) ^ (aBits1 & bBits0)
 
-    # if coeffs agree, commutator is 0, ergo aInd,bInd commute
-    return abCoeff == baCoeff
+    # strings commute if parity of non-commuting pairs is even
+    return not (flags.bit_count() % 2)
 
 
 def getIndOfPauliString(paulis):

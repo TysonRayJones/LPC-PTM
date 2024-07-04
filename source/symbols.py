@@ -70,7 +70,7 @@ class Symb(sp.Symbol):
         # uniquely identify the assumptions attached to the symbol.
         # note that superflously setting a default value (e.g. complex=True)
         # results in a unique key and the PTM would be re-computed. That's ok.
-        return '_'.join(f'{key}={val}' for key,val in self._assumps.items())
+        return ','.join(f'{key}={val}' for key,val in self._assumps.items())
 
 
 class Param(Symb):
